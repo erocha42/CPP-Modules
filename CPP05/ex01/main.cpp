@@ -94,7 +94,7 @@ int	main(void)
 		std::cout << "----- " << fTests[i].testName << " -----" << std::endl;
 		try
 		{
-			Form f(fTests[i].name, fTests[i].isSign, fTests[i].gradeToSign, fTests[i].gradeToExecute);
+			Form f(fTests[i].name, fTests[i].gradeToSign, fTests[i].gradeToExecute);
 			std::cout << "\033[32mSuccess: " << f << "\033[0m" << std::endl;
 		}
 		catch (const std::exception& e)
@@ -108,7 +108,7 @@ int	main(void)
 		std::cout << "----- Bureaucrat well qualified (grade 3) signs form requiring grade 5 -----" << std::endl;
 		std::string fname = "Robotomy Request";
 		std::string bname = "Strong";
-		Form f(fname, false, 5, 45);
+		Form f(fname, 5, 45);
 		Bureaucrat strong(bname, 3);
 		strong.signForm(f);
 		std::cout << f << std::endl;
@@ -118,7 +118,7 @@ int	main(void)
 		std::cout << "----- Bureaucrat under-qualified (grade 100) signs form requiring grade 5 -----" << std::endl;
 		std::string fname = "Robotomy Request";
 		std::string bname = "Weak";
-		Form f(fname, false, 5, 45);
+		Form f(fname, 5, 45);
 		Bureaucrat weak(bname, 100);
 		weak.signForm(f);
 		std::cout << f << std::endl;
@@ -128,7 +128,7 @@ int	main(void)
 		std::cout << "----- Bureaucrat exactly at threshold (grade 5) signs form requiring grade 5 -----" << std::endl;
 		std::string fname = "Robotomy Request";
 		std::string bname = "Exact";
-		Form f(fname, false, 5, 45);
+		Form f(fname, 5, 45);
 		Bureaucrat exact(bname, 5);
 		exact.signForm(f);
 		std::cout << f << std::endl;
@@ -138,7 +138,7 @@ int	main(void)
 		std::cout << "----- Signing an already-signed form again -----" << std::endl;
 		std::string fname = "Robotomy Request";
 		std::string bname = "Strong";
-		Form f(fname, false, 5, 45);
+		Form f(fname, 5, 45);
 		Bureaucrat strong(bname, 3);
 		strong.signForm(f);
 		std::cout << "First attempt: " << f << std::endl;
@@ -150,8 +150,8 @@ int	main(void)
 		std::cout << "----- Copy assignment: isSign propagates, name/grades stay untouched -----" << std::endl;
 		std::string fname1 = "Signed Original";
 		std::string fname2 = "Untouched Copy";
-		Form original(fname1, false, 5, 45);
-		Form copy(fname2, false, 10, 20);
+		Form original(fname1, 5, 45);
+		Form copy(fname2, 10, 20);
 		std::string bname = "Signer";
 		Bureaucrat b(bname, 3);
 		b.signForm(original);
@@ -165,7 +165,7 @@ int	main(void)
 		std::cout << "----- Direct call to beSigned(), bureaucrat qualified: exception must NOT be thrown -----" << std::endl;
 		std::string fname = "Direct Test A";
 		std::string bname = "Qualified";
-		Form f(fname, false, 50, 100);
+		Form f(fname, 50, 100);
 		Bureaucrat b(bname, 10);
 		try
 		{
@@ -182,7 +182,7 @@ int	main(void)
 		std::cout << "----- Direct call to beSigned(), bureaucrat under-qualified: exception MUST be caught here -----" << std::endl;
 		std::string fname = "Direct Test B";
 		std::string bname = "Unqualified";
-		Form f(fname, false, 5, 45);
+		Form f(fname, 5, 45);
 		Bureaucrat b(bname, 100);
 		try
 		{
@@ -201,7 +201,7 @@ int	main(void)
 		std::string fname = "Direct Test C";
 		try
 		{
-			Form f(fname, false, 200, 45);
+			Form f(fname, 200, 45);
 			std::cout << "\033[31mNo exception thrown, but one was expected!\033[0m" << std::endl;
 			(void)f;
 		}

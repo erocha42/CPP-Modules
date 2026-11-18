@@ -1,0 +1,23 @@
+# Build artifacts
+*.o
+*.d
+*.a
+obj/
+a.out
+CPP0*/ex*/ex0[0-9]
+megaphone
+phonebook
+zombie
+brain
+weapon
+replace
+harl
+harlFilter
+fixed
+ClapTrap
+ScavTrap
+FragTrap
+Animal
+Brain
+*.replace
+*_shrubbery
